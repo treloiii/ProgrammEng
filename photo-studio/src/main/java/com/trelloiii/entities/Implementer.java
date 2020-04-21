@@ -4,19 +4,32 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.Comparator;
 
+/**
+ * Класс описыващий сущность исполнитель в базе данных.
+ * Каждое поле класса - столбец в связанной таблице implementers
+ * @author trelloiii
+ */
 @Entity
 @Table(name="implementers")
 public class Implementer {
+    /** Поле id*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    /** Имя исполнителя*/
     private String name;
+    /** Фамилия исполнителя*/
     private String surname;
+    /** Номер телефона исполнителя*/
     private String phone;
+    /** Адрес электронной почты исполнителя*/
     private String email;
+    /** Возраст исполнителя*/
     private int age;
+    /** Минимальная цена заказа, за который готов взяться исполнитель*/
     @Column(name="min_price")
     private int minimalPrice;//min price for get work
+    /** Количество лет опыта работы исполнителя*/
     private int experience;
 
 

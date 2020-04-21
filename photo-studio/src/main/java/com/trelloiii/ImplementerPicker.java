@@ -8,15 +8,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для выбора исполнителя при подаче заявки
+ * @author trelloiii
+ */
 public class ImplementerPicker {
-
+    /**
+     * Сервис исполнителей
+     * @see ImplementerService
+     */
     private ImplementerService implementerService;
-
+    /**
+     * Заявка
+     * @see Request
+     */
     private Request request;
+
+    /**
+     * Конструктор
+     * @param request - заявка
+     * @param implementerService - сервис исполнителей
+     */
     public ImplementerPicker(Request request,ImplementerService implementerService) {
         this.request = request;
         this.implementerService=implementerService;
     }
+
+    /**
+     * Метод выбирает исполнителя.
+     * При выборе учитываются параметры опыта работы, цены заявки и минимальной оплаты исполнителя.
+     * Выбирается исполнитель с наилучшим соотношением цены и опыта работы
+     * @throws IllegalStateException выбрасывается если исполнитель не найден
+     */
     public void pickImplementer() throws IllegalStateException{
         List<Implementer> candidates=sortCandidates();
         System.out.println(candidates.size());
@@ -55,6 +78,12 @@ public class ImplementerPicker {
             throw new IllegalStateException("no candidates available");
         }
     }
+
+    /**
+     * Отбирает из всех исполнителей тех что имеют минимальный уровень оплаты ниже либо равным цене заявки.
+     * Сортирует полученный список по возрастанию опыта работы исполнителей
+     * @return возвращает список исполнителей
+     */
     private List<Implementer> sortCandidates(){
         List<Implementer> implementers=implementerService.getAll();
         double requestPrice=request.getPattern().getPrice();
