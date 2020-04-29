@@ -37,6 +37,9 @@ public class ImplementerService {
         dao.findAll().forEach(res::add);
         return res;
     }
+    public void delete(Implementer implementer){
+        dao.delete(implementer);
+    }
     /**
      * Метод для добавления нового исполнителя
      * @param implementer - исполнитель, автоматически преобразуется из Json в Java класс

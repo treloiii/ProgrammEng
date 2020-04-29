@@ -37,6 +37,9 @@ public class PatternService {
         dao.findAll().forEach(result::add);
         return result;
     }
+    public void delete(Pattern pattern){
+        dao.delete(pattern);
+    }
     /**
      * Метод для добавления нового шаблона
      * @param pattern - шаблон, автоматически преобразуется из Json в Java класс
