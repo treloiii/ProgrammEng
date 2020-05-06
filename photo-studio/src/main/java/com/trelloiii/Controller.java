@@ -8,6 +8,7 @@ import com.trelloiii.services.ImplementerService;
 import com.trelloiii.services.PatternService;
 import com.trelloiii.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -71,6 +72,7 @@ public class Controller {
      * @see RequestService#getAll()
      * @return возвращает список всех заявок
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/get/request/all")
     public List<Request> getRequests(){
         return requestService.getAll();
@@ -81,6 +83,7 @@ public class Controller {
      * @see ImplementerService#getById(int)
      * @return возвращает исполнителя
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/get/implementer")
     public Implementer getImplementerById(@RequestParam("id") int id){
         return implementerService.getById(id);
@@ -90,6 +93,7 @@ public class Controller {
      * @return возвращает список всех исполнителей
      * @see ImplementerService#getAll()
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/get/implementer/all")
     public List<Implementer> getImplementers(){
         return implementerService.getAll();
@@ -119,6 +123,7 @@ public class Controller {
      * @see ImplementerService#newImplementer(Implementer)
      * @return возвращает строку с информацией об успешном сохранении исполнителя
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/new/implementer")
     public String newImplementer(@RequestBody Implementer implementer){
         implementerService.newImplementer(implementer);
@@ -132,6 +137,7 @@ public class Controller {
      * @see PatternService#newPattern(Pattern)
      * @return возвращает строку с информацией об успешном сохранении шаблона
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/new/pattern")
     public String newPattern(@RequestBody Pattern pattern){
         patternService.newPattern(pattern);
@@ -145,6 +151,7 @@ public class Controller {
      * @param requestId - id заявки у которой нужно сменить статус
      * @return возвращает информацию об успешной обновлении заявки либо сообщение об ошибке
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/set/requestStatus/{request_id}")
     public String setRequestStatus(@RequestBody String requestStatus,@PathVariable(name = "request_id") int requestId){
         try {
