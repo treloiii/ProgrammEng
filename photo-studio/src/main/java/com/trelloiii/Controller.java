@@ -19,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
+@RequestMapping("/")
 public class Controller {
     /**
      * Сервис отвечающий за логику работы с сотрудниками
